@@ -4,27 +4,27 @@
 #define MAX 100
 
 typedef struct {
-    int patientId;
-    char fullName[50];
+    char patientId[20];
+    char fullName[100];
     char phone[15];
-    char dob[15];
+    char dateOfBirth[15];
 } Patient;
 
 typedef struct {
-    int patientId;
+    char patientId[20];
     int status;
 } Queue;
 
 typedef struct {
-    int visitId;
-    int patientId;
-    int changeId;
+    char visitId[20];
+    char patientId[20];
+    char changeId[20];
     char visitDate[15];
 } Visit;
 
 typedef struct {
-    int appointmentId;
-    int patientId;
+    char appointmentId[20];
+    char patientId[20];
     char appointmentDate[15];
     char timeSlot[20];
     int status;
