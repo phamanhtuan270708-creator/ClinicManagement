@@ -4,36 +4,36 @@
 #define MAX 100
 
 typedef struct {
-    int patientId;
+    char patientId[20];
     char fullName[50];
     char phone[15];
     char dob[15];
 } Patient;
 
 typedef struct {
-    int patientId;
+    char patientId[20];
     int status;
 } Queue;
 
 typedef struct {
-    int visitId;
-    int patientId;
-    int changeId;
+    char visitId[20];
+    char patientId[20];
+    char changeId[20]; 
     char visitDate[15];
 } Visit;
 
 typedef struct {
-    int appointmentId;
-    int patientId;
+    char appointmentId[20];
+    char patientId[20];
     char appointmentDate[15];
     char timeSlot[20];
-    int status;
+    int status; 
 } Appointment;
 
 typedef struct {
-    int visitId;
-    char symptoms[100];
-    float height;
+    char visitId[20];
+    char symptoms[100]; 
+    float height; 
     float weight;
     char diagnosis[100];
 } MedicalRecord;
@@ -46,16 +46,16 @@ typedef struct {
 } PrescriptionItem;
 
 typedef struct {
-    int prescriptionId;
-    int visitId;
+    char prescriptionId[20];
+    char visitId[20];
     PrescriptionItem items[MAX];
     int itemCount;
 } Prescription;
 
 typedef struct {
-    int paymentId;
-    int visitId;
-    float totalAmount;
+    char paymentId[20];
+    char visitId[20];
+    float totalAmount; 
     int paymentMethods;
 } Payment;
 #endif

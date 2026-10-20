@@ -1,11 +1,10 @@
-
 #include <stdio.h>
 #include "clinic.h"
 
 MedicalRecord records[MAX];
 int recordCount = 0;
 
-//xoa du lieu con du trong bo nho dem
+// xoa du lieu con du trong bo nho dem
 void clearBuffer(void) 
 {
     int c;
@@ -28,7 +27,7 @@ int checkNumberEnd(void)
     return 0;
 }
 
-//Nhap so nguyen 
+// Nhap so nguyen 
 int inputInt(const char *message) 
 {
     int value;
@@ -63,7 +62,7 @@ float inputFloat(const char *message, float min, float max)
         {
             if (checkNumberEnd() &&
                 value >= min && value <= max) 
-                {
+            {
                 return value;
             }
         } 
@@ -72,22 +71,19 @@ float inputFloat(const char *message, float min, float max)
             clearBuffer();
         }
 
-        printf("Loi: Nhap so hop le trong khoang %.1f - %.1f!\n",
-               min, max);
+        printf("Loi: Nhap so hop le trong khoang %.1f den %.1f!\n", min, max);
     }
 }
 
 // Nhap vao chi gom chu cai va khoang trang
 int inputText(const char *message, char text[], int size) 
 {
-    
-
     while (1) {
-		int c;
-	    int i = 0;
-	    int hasLetter = 0;
-	    int tooLong = 0;
-	    int valid = 1;
+        int c;
+        int i = 0;
+        int hasLetter = 0;
+        int tooLong = 0;
+        int valid = 1;
         printf("%s", message);
 
         while ((c = getchar()) != '\n' && c != EOF) 
@@ -121,12 +117,63 @@ int inputText(const char *message, char text[], int size)
     }
 }
 
+// Nhap chuoi ma ID (cho phep chu va so, khong chua khoang trang)
+int inputCode(const char *message, char text[], int size) 
+{
+    while (1) {
+        int c;
+        int i = 0;
+        int hasChar = 0;
+        int tooLong = 0;
+        int valid = 1;
+        printf("%s", message);
+
+        while ((c = getchar()) != '\n' && c != EOF) 
+        {
+            if (i < size - 1)
+                text[i++] = (char)c;
+            else
+                tooLong = 1;
+
+            if ((c >= 'A' && c <= 'Z') ||
+                (c >= 'a' && c <= 'z') ||
+                (c >= '0' && c <= '9')) {
+                hasChar = 1;
+            } 
+            else 
+            {
+                valid = 0;
+            }
+        }
+
+        text[i] = '\0';
+
+        if (valid && hasChar && !tooLong)
+            return 1;
+
+        printf("Loi: Ma chi gom chu va so, khong chua khoang trang hoac ky tu dac biet!\n");
+
+        if (c == EOF)
+            return 0;
+    }
+}
+
+// Ham so sanh 2 chuoi thu cong (khong dung string.h)
+int compareString(const char *s1, const char *s2) 
+{
+    while (*s1 && (*s1 == *s2)) {
+        s1++;
+        s2++;
+    }
+    return *(unsigned char *)s1 - *(unsigned char *)s2;
+}
+
 // Kiem tra luot kham da ton tai 
-int findRecord(int visitId) 
+int findRecord(const char *visitId) 
 {
     for (int i = 0; i < recordCount; i++) 
     {
-        if (records[i].visitId == visitId)
+        if (compareString(records[i].visitId, visitId) == 0)
             return i;
     }
 
@@ -144,13 +191,8 @@ void addMedicalRecord(void)
 
     MedicalRecord temp;
 
-    temp.visitId = inputInt("Nhap luot kham: ");
-
-    if (temp.visitId <= 0) 
-    {
-        printf("Loi: Luot kham phai lon hon 0!\n");
+    if (!inputCode("Nhap luot kham: ", temp.visitId, sizeof(temp.visitId)))
         return;
-    }
 
     if (findRecord(temp.visitId) != -1) {
         printf("Loi: Luot kham da co ho so!\n");
@@ -188,7 +230,7 @@ void displayMedicalRecords(void) {
 
     for (int i = 0; i < recordCount; i++) {
         printf("\n--- Ho so %d ---\n", i + 1);
-        printf("Luot kham  : %d\n", records[i].visitId);
+        printf("Luot kham  : %s\n", records[i].visitId);
         printf("Trieu chung: %s\n", records[i].symptoms);
         printf("Chieu cao  : %.1f cm\n", records[i].height);
         printf("Can nang   : %.1f kg\n", records[i].weight);
@@ -199,8 +241,11 @@ void displayMedicalRecords(void) {
 // Tim kiem ho so theo luot kham
 void searchMedicalRecord(void) 
 {
-    int id = inputInt("Nhap luot kham can tim: ");
-    int index = findRecord(id);
+    char searchId[20];
+    if (!inputCode("Nhap luot kham can tim: ", searchId, sizeof(searchId)))
+        return;
+
+    int index = findRecord(searchId);
 
     if (index == -1) 
     {
@@ -208,7 +253,7 @@ void searchMedicalRecord(void)
         return;
     }
 
-    printf("Luot kham  : %d\n", records[index].visitId);
+    printf("Luot kham  : %s\n", records[index].visitId);
     printf("Trieu chung: %s\n", records[index].symptoms);
     printf("Chieu cao  : %.1f cm\n", records[index].height);
     printf("Can nang   : %.1f kg\n", records[index].weight);
@@ -225,7 +270,6 @@ int main(void)
         printf("1. Them ho so kham benh\n");
         printf("2. Hien thi ho so\n");
         printf("3. Tim kiem ho so\n");
-        
 
         choice = inputInt("Lua chon: ");
 
@@ -251,4 +295,3 @@ int main(void)
 
     return 0;
 }
-
