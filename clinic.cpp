@@ -11,11 +11,24 @@ typedef struct {
 } Patient;
 
 typedef struct {
+    int patientId;
+    int status;
+} Queue;
+
+typedef struct {
     int visitId;
     int patientId;
     int changeId;
     char visitDate[15];
 } Visit;
+
+typedef struct {
+    int appointmentId;
+    int patientId;
+    char appointmentDate[15];
+    char timeSlot[20];
+    int status;
+} Appointment;
 
 typedef struct {
     int visitId;
@@ -24,6 +37,20 @@ typedef struct {
     float weight;
     char diagnosis[100];
 } MedicalRecord;
+
+typedef struct {
+    char medicineId[20];
+    int quantity;
+    float unitPrice;
+    char usage[100];
+} PrescriptionItem;
+
+typedef struct {
+    int prescriptionId;
+    int visitId;
+    PrescriptionItem items[MAX];
+    int itemCount;
+} Prescription;
 
 typedef struct {
     int paymentId;
