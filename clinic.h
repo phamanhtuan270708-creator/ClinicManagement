@@ -1,61 +1,71 @@
 #ifndef CLINIC_H
 #define CLINIC_H
 
-#define MAX 100
+#define MAX_PATIENTS 100
+
+#define MAX_ID 20
+#define MAX_PHONE 15
+#define MAX_NAME 100
+#define MAX_DATE 13
+
+#define MAX_TIME 20
+#define MAX_TEXT 100
+#define MAX_METHOD_NAME 20
+#define MAX_ITEM 50
 
 typedef struct {
-    char patientId[20];
-    char fullName[100];
-    char phone[15];
-    char dateOfBirth[15];
+    char patientId [MAX_ID];
+    char fullName [MAX_NAME];
+    char phone [MAX_PHONE];
+    char dateOfBirth [MAX_DATE];
 } Patient;
 
 typedef struct {
-    char patientId[20];
+    char patientId [MAX_ID];
     int status;
 } Queue;
 
 typedef struct {
-    char visitId[20];
-    char patientId[20];
-    char changeId[20];
-    char visitDate[15];
+    char visitId [MAX_ID];
+    char patientId [MAX_ID];
+    char changeId [MAX_ID];
+    char visitDate [MAX_DATE];
 } Visit;
 
 typedef struct {
-    char appointmentId[20];
-    char patientId[20];
-    char appointmentDate[15];
-    char timeSlot[20];
+    char appointmentId [MAX_ID];
+    char patientId [MAX_ID];
+    char appointmentDate [MAX_DATE];
+    char timeSlot [MAX_TIME];
     int status;
 } Appointment;
 
 typedef struct {
-    int visitId;
-    char symptoms[100];
+    char visitId [MAX_ID];
+    char symptoms [MAX_TEXT];
     float height;
     float weight;
-    char diagnosis[100];
+    char diagnosis [MAX_TEXT];
 } MedicalRecord;
 
 typedef struct {
-    char medicineId[20];
+    char medicineId[MAX_ID];
     int quantity;
-    float unitPrice;
+    double unitPrice;
     char usage[100];
 } PrescriptionItem;
 
 typedef struct {
-    int prescriptionId;
-    int visitId;
-    PrescriptionItem items[MAX];
+    char prescriptionId [MAX_ID] ;
+    char visitId [MAX_ID];
+    PrescriptionItem items[MAX_ITEM];
     int itemCount;
 } Prescription;
 
 typedef struct {
-    int paymentId;
-    int visitId;
-    float totalAmount;
-    int paymentMethods;
+    char paymentId [MAX_ID];
+    char visitId [MAX_ID];
+    double totalAmount;
+    char paymentMethods [MAX_METHOD_NAME];
 } Payment;
 #endif
