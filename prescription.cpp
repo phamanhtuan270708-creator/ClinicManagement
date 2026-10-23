@@ -2,7 +2,7 @@
 #include <string.h>
 #include "clinic.h"
 
-// Xoa dau xuong dong va ky tu thua trong bo nho dem
+// Xoa dau xuong dong trong bo nho dem
 void xoaBoDem() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
