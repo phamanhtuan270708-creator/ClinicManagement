@@ -73,7 +73,7 @@ void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
     xoaBoDem();
 
     int laLichOnline, daDenKham;
-    printf("Day co phai lich hen online khong? (1. Co, 0. Khong): ");
+    printf("Hinh thuc (1. Online, 0. Offline): ");
     scanf("%d", &laLichOnline);
     xoaBoDem();
 
@@ -104,7 +104,7 @@ void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
     }
 
     double phiDichVu;
-    printf("Nhap phi dich vu thuc te phat sinh: ");
+    printf("Nhap phi dich vu: ");
     scanf("%lf", &phiDichVu);
     xoaBoDem();
 
@@ -155,9 +155,9 @@ int main() {
 
     do {
         printf("\n=== QUAN LY PHONG KHAM ===\n");
-        printf("1. Them muc thuoc\n");
+        printf("1. Them thuoc\n");
         printf("2. Xem don thuoc\n");
-        printf("3. Thuc hien thanh toan\n");
+        printf("3. Thanh toan\n");
         printf("4. Xem danh sach thanh toan\n");
         printf("0. Thoat\n");
         printf("Lua chon: ");
