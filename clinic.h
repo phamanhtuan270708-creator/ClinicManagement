@@ -2,12 +2,10 @@
 #define CLINIC_H
 
 #define MAX_PATIENTS 100
-
 #define MAX_ID 20
 #define MAX_PHONE 15
 #define MAX_NAME 100
 #define MAX_DATE 13
-
 #define MAX_TIME 20
 #define MAX_TEXT 100
 #define MAX_METHOD_NAME 20
