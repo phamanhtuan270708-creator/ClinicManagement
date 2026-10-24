@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include "clinic.h"
 
 // Xoa dau xuong dong trong bo nho dem
@@ -9,145 +8,174 @@ void xoaBoDem() {
 }
 
 // Them thuoc
-void themThuoc(Prescription *p) {
-    int n;
-    printf("Nhap so luong loai thuoc: ");
-    if (scanf("%d", &n) != 1 || n <= 0 || p->itemCount + n > MAX_ITEM) {
-        printf("Loi nhap lieu hoac vuot qua gioi han!\n");
-        xoaBoDem();
+void themPrescriptionItem(Prescription *p) {
+    if (p->itemCount >= MAX_ITEM) {
+        printf("Don thuoc da dat gioi han toi da!\n");
         return;
     }
+    
+    PrescriptionItem *it = &p->items[p->itemCount];
+    
+    printf("Nhap ma thuoc: ");
+    scanf("%s", it->medicineId);
     xoaBoDem();
-
-    for (int i = 0; i < n; i++) {
-        PrescriptionItem *it = &p->items[p->itemCount];
-        
-        printf("\n--- Thuoc thu %d ---\n", p->itemCount + 1);
-        
-        printf("Ma thuoc: ");
-        scanf("%s", it->medicineId);
-        xoaBoDem();
-
-        printf("So luong: ");
-        while (scanf("%d", &it->quantity) != 1 || it->quantity <= 0) {
-            printf("Nhap lai so luong (> 0): ");
-            xoaBoDem();
-        }
-        xoaBoDem();
-
-        printf("Don gia: ");
-        while (scanf("%lf", &it->unitPrice) != 1 || it->unitPrice < 0) {
-            printf("Nhap lai don gia (>= 0): ");
-            xoaBoDem();
-        }
-        xoaBoDem();
-
-        printf("Huong dan SD: ");
-        scanf(" %[^\n]", it->usage);
-        xoaBoDem();
-
-        p->itemCount++;
-    }
-    printf("=> Them thanh cong!\n");
+    
+    printf("Nhap so luong: ");
+    scanf("%d", &it->quantity);
+    xoaBoDem();
+    
+    printf("Nhap don gia: ");
+    scanf("%lf", &it->unitPrice);
+    xoaBoDem();
+    
+    printf("Nhap huong dan su dung: ");
+    scanf("%s", it->usage);
+    xoaBoDem();
+    
+    p->itemCount++;
+    printf("=> Them muc thuoc thanh cong!\n");
 }
 
-// Hien thi thuoc, tien
-void hienThiThuoc(Prescription *p) {
+// Hien thi
+void hienThiPrescription(Prescription *p) {
     if (p->itemCount == 0) {
-        printf("\nDon thuoc trong!\n");
+        printf("Don thuoc dang trong!\n");
         return;
     }
     
-    printf("\n======================= DANH SACH DON THUOC ========================\n");
-    printf("Ma don thuoc: %s | Ma luot kham: %s\n", p->prescriptionId, p->visitId);
-    printf("--------------------------------------------------------------------\n");
-    printf("%-5s | %-18s | %-8s | %-12s | %-18s\n", "STT", "Ma Thuoc", "SL", "Don Gia", "Huong Dan SD");
-    printf("--------------------------------------------------------------------\n");
+    double tongTienThuoc = 0;
+    printf("\n--- CHI TIET DON THUOC (%s) ---\n", p->prescriptionId);
+    printf("Ma luot kham: %s\n", p->visitId);
     
-    double tongTien = 0;
     for (int i = 0; i < p->itemCount; i++) {
-        PrescriptionItem it = p->items[i];
-        double thanhTien = it.quantity * it.unitPrice;
-        tongTien += thanhTien;
-        
-        printf("%-5d | %-18s | %-8d | %-12.2lf | %-18s\n",
-            i + 1, it.medicineId, it.quantity, it.unitPrice, it.usage
-        );
+        double thanhTien = p->items[i].quantity * p->items[i].unitPrice;
+        tongTienThuoc += thanhTien;
+        printf("%d. Ma thuoc: %s | SL: %d | Gia: %.2lf | Thanh tien: %.2lf\n",
+            i + 1, p->items[i].medicineId, p->items[i].quantity, p->items[i].unitPrice, thanhTien);
     }
-    printf("--------------------------------------------------------------------\n");
-    printf("TONG CONG TIEN THUOC: %.2lf VND\n", tongTien);
-    printf("====================================================================\n");
+    printf("=> Tong tien thuoc: %.2lf\n", tongTienThuoc);
 }
 
-// Xoa thuoc
-void xoaThuoc(Prescription *p) {
-    if (p->itemCount == 0) {
-        printf("\nDon thuoc dang trong, khong co gi de xoa!\n");
+// Thanh toan
+void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
+    if (*payCount >= MAX_PATIENTS) {
+        printf("Danh sach thanh toan da day!\n");
         return;
     }
-    
-    char maXoa[MAX_ID];
-    printf("Nhap ma thuoc can xoa: ");
-    scanf("%s", maXoa);
+
+    Payment pay;
+    printf("Nhap ma thanh toan: ");
+    scanf("%s", pay.paymentId);
     xoaBoDem();
 
-    int foundIdx = -1;
-    for (int i = 0; i < p->itemCount; i++) {
-        if (strcmp(p->items[i].medicineId, maXoa) == 0) {
-            foundIdx = i;
+    printf("Nhap ma luot kham: ");
+    scanf("%s", pay.visitId);
+    xoaBoDem();
+
+    int laLichOnline, daDenKham;
+    printf("Day co phai lich hen online khong? (1. Co, 0. Khong): ");
+    scanf("%d", &laLichOnline);
+    xoaBoDem();
+
+    if (laLichOnline == 1) {
+        printf("Benh nhan da den kham chua? (1. Da den, 0. Chua den): ");
+        scanf("%d", &daDenKham);
+        xoaBoDem();
+        if (daDenKham == 0) {
+            printf("=> LOI: Lich hen online chua den kham, khong duoc tinh thanh toan!\n");
+            return;
+        }
+    }
+
+    double tienThuoc = 0;
+    int trungMa = 1;
+    for (int i = 0; i < MAX_ID; i++) {
+        if (pay.visitId[i] != p->visitId[i]) {
+            trungMa = 0;
             break;
         }
+        if (pay.visitId[i] == '\0') break;
     }
 
-    if (foundIdx == -1) {
-        printf("Khong tim thay ma thuoc '%s' trong don!\n", maXoa);
+    if (trungMa == 1) {
+        for (int i = 0; i < p->itemCount; i++) {
+            tienThuoc += p->items[i].quantity * p->items[i].unitPrice;
+        }
+    }
+
+    double phiDichVu;
+    printf("Nhap phi dich vu thuc te phat sinh: ");
+    scanf("%lf", &phiDichVu);
+    xoaBoDem();
+
+    pay.totalAmount = tienThuoc + phiDichVu;
+
+    printf("Nhap phuong thuc thanh toan: ");
+    scanf("%s", pay.paymentMethods);
+    xoaBoDem();
+
+    payments[*payCount] = pay;
+    (*payCount)++;
+    printf("=> Thanh toan thanh cong! Tong tien: %.2lf\n", pay.totalAmount);
+}
+
+// Hien thi thanh toan
+void hienThiDanhSachThanhToan(Payment payments[], int payCount) {
+    if (payCount == 0) {
+        printf("Chua co hoa don thanh toan nao!\n");
         return;
     }
 
-    for (int i = foundIdx; i < p->itemCount - 1; i++) {
-        p->items[i] = p->items[i + 1];
+    printf("\n--- DANH SACH THANH TOAN ---\n");
+    for (int i = 0; i < payCount; i++) {
+        printf("%d. MaTT: %s | MaVK: %s | Tong Tien: %.2lf | Phuong Thuc: %s\n",
+            i + 1,
+            payments[i].paymentId,
+            payments[i].visitId,
+            payments[i].totalAmount,
+            payments[i].paymentMethods
+        );
     }
-    p->itemCount--;
-    printf("=> Xoa thanh cong thuoc co ma '%s' khoi don!\n", maXoa);
 }
 
 int main() {
     Prescription don;
     don.itemCount = 0;
-    strcpy(don.prescriptionId, "PRS01");
-    strcpy(don.visitId, "VST01");
+    
+    char pId[] = "DON01";
+    char vId[] = "KHACH01";
+    for(int i = 0; i < 6; i++) {
+        don.prescriptionId[i] = pId[i];
+        don.visitId[i] = vId[i];
+    }
 
+    Payment danhSachThanhToan[MAX_PATIENTS];
+    int soLuongThanhToan = 0;
     int chon;
+
     do {
-        printf("\n=== MENU QUAN LY DON THUOC ===\n");
-        printf("1. Them thuoc\n");
-        printf("2. Xem danh sach va tong tien\n");
-        printf("3. Xoa thuoc khoi don\n");
+        printf("\n=== QUAN LY PHONG KHAM ===\n");
+        printf("1. Them muc thuoc\n");
+        printf("2. Xem don thuoc\n");
+        printf("3. Thuc hien thanh toan\n");
+        printf("4. Xem danh sach thanh toan\n");
         printf("0. Thoat\n");
         printf("Lua chon: ");
         
         if (scanf("%d", &chon) != 1) {
-            printf("Vui long nhap so!\n");
             xoaBoDem();
             continue;
         }
         xoaBoDem();
 
-        switch (chon) {
-            case 1: 
-                themThuoc(&don); 
-                break;
-            case 2: 
-                hienThiThuoc(&don); 
-                break;
-            case 3: 
-                xoaThuoc(&don); 
-                break;
-            case 0: 
-                printf("Thoat chuong trinh.\n"); 
-                break;
-            default: 
-                printf("Sai lua chon! Vui long chon lai.\n");
+        if (chon == 1) {
+            themPrescriptionItem(&don);
+        } else if (chon == 2) {
+            hienThiPrescription(&don);
+        } else if (chon == 3) {
+            thucHienThanhToan(danhSachThanhToan, &soLuongThanhToan, &don);
+        } else if (chon == 4) {
+            hienThiDanhSachThanhToan(danhSachThanhToan, soLuongThanhToan);
         }
     } while (chon != 0);
 
