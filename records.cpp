@@ -1,5 +1,5 @@
-#ifndef RECORDS
-#define RECORDS
+#ifndef RECORDS_H
+#define RECORDS_H
 
 #include <stdio.h>
 #include "clinic.h"
