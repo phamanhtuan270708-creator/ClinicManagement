@@ -135,8 +135,6 @@ void hienThiDanhSachThanhToan(Payment payments[], int payCount) {
     }
 }
 
-<<<<<<< HEAD
-=======
 int main() {
     Prescription don;
     don.itemCount = 0;
@@ -180,5 +178,4 @@ int main() {
 
     return 0;
 }
->>>>>>> be685d99501154e507fdd9f8093141615a70167a
 #endif
