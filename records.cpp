@@ -1,3 +1,6 @@
+#ifndef RECORDS
+#define RECORDS
+
 #include <stdio.h>
 #include "clinic.h"
 
@@ -134,3 +137,4 @@ int main() {
 
     return 0;
 }
+#endif
