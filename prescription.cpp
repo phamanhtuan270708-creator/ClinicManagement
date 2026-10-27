@@ -1,5 +1,6 @@
-#ifndef PRESCRIPTION
-#define PRESCRIPTION
+#ifndef PRESCRIPTION_H
+#define PRESCRIPTION_H
+
 #include <stdio.h>
 #include "clinic.h"
 
