@@ -28,7 +28,7 @@ typedef struct {
     char patientId [MAX_ID];
     char fullName [MAX_NAME];
     char phone [MAX_PHONE];
-    char dateOfBirth [MAX_DATE];\
+    char dateOfBirth [MAX_DATE];
 
     int type;
     int appointmentTime;
@@ -88,4 +88,5 @@ void printPatientList (const Patient list [], int n);
 void inputQueueList (Patient * patient);
 void sortQueue (Patient list [], int patientCount);
 void printSortQueue(Patient list [], int patientCount);
+
 #endif

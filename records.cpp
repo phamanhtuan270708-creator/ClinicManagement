@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "clinic.h"
 
-MedicalRecord records[MAX_ID];
+MedicalRecord records[MAX_PATIENTS];
 int recordCount = 0;
 
 // Xoa dau xuong dong trong bo nho dem
@@ -137,4 +137,6 @@ int main() {
 
     return 0;
 }
+
 #endif
+
