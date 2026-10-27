@@ -1,3 +1,6 @@
+#ifndef PATIENT_QUEUE
+#define PATIENT_QUEUE
+
 #include "clinic.h"
 #include <stdio.h>
 #include <string.h>
@@ -148,3 +151,4 @@ void printSortQueue(Patient list [], int patientCount) {
        
     }
 }
+#endif
