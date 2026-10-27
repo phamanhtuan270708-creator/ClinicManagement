@@ -135,4 +135,50 @@ void hienThiDanhSachThanhToan(Payment payments[], int payCount) {
     }
 }
 
+<<<<<<< HEAD
+=======
+int main() {
+    Prescription don;
+    don.itemCount = 0;
+    
+    char pId[] = "DON01";
+    char vId[] = "KHACH01";
+    for(int i = 0; i < 6; i++) {
+        don.prescriptionId[i] = pId[i];
+        don.visitId[i] = vId[i];
+    }
+
+    Payment danhSachThanhToan[MAX_PATIENTS];
+    int soLuongThanhToan = 0;
+    int chon;
+
+    do {
+        printf("\n=== QUAN LY PHONG KHAM ===\n");
+        printf("1. Them thuoc\n");
+        printf("2. Xem don thuoc\n");
+        printf("3. Thanh toan\n");
+        printf("4. Xem danh sach thanh toan\n");
+        printf("0. Thoat\n");
+        printf("Lua chon: ");
+        
+        if (scanf("%d", &chon) != 1) {
+            xoaBoDem();
+            continue;
+        }
+        xoaBoDem();
+
+        if (chon == 1) {
+            themPrescriptionItem(&don);
+        } else if (chon == 2) {
+            hienThiPrescription(&don);
+        } else if (chon == 3) {
+            thucHienThanhToan(danhSachThanhToan, &soLuongThanhToan, &don);
+        } else if (chon == 4) {
+            hienThiDanhSachThanhToan(danhSachThanhToan, soLuongThanhToan);
+        }
+    } while (chon != 0);
+
+    return 0;
+}
+>>>>>>> be685d99501154e507fdd9f8093141615a70167a
 #endif
