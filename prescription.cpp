@@ -1,11 +1,8 @@
+#ifndef PRESCRIPTION_H
+#define PRESCRIPTION_H
+
 #include <stdio.h>
 #include "clinic.h"
-
-// Xoa dau xuong dong trong bo nho dem
-void xoaBoDem() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
 
 // Them thuoc
 void themPrescriptionItem(Prescription *p) {
@@ -181,3 +178,4 @@ int main() {
 
     return 0;
 }
+#endif

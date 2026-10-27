@@ -1,14 +1,11 @@
+#ifndef RECORDS_H
+#define RECORDS_H
+
 #include <stdio.h>
 #include "clinic.h"
 
 MedicalRecord records[MAX_PATIENTS];
 int recordCount = 0;
-
-// Xoa dau xuong dong trong bo nho dem
-void xoaBoDem() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
 
 // Kiem tra luot kham co ton tai hay khong
 int findRecord(const char *visitId) {
@@ -102,35 +99,5 @@ void timKiemMedicalRecord() {
     printf("Chan doan  : %s\n", records[index].diagnosis);
 }
 
-int main() {
-    int chon;
+#endif
 
-    do {
-        printf("\n=== QUAN LY HO SO KHAM BENH ===\n");
-        printf("1. Them ho so kham benh\n");
-        printf("2. Xem danh sach ho so\n");
-        printf("3. Tim kiem ho so\n");
-        printf("0. Thoat\n");
-        printf("Lua chon: ");
-
-        if (scanf("%d", &chon) != 1) {
-            xoaBoDem();
-            continue;
-        }
-        xoaBoDem();
-
-        if (chon == 1) {
-            themMedicalRecord();
-        } else if (chon == 2) {
-            hienThiMedicalRecords();
-        } else if (chon == 3) {
-            timKiemMedicalRecord();
-        } else if (chon == 0) {
-            printf("Thoat chuong trinh!\n");
-        } else {
-            printf("Lua chon khong hop le!\n");
-        }
-    } while (chon != 0);
-
-    return 0;
-}
