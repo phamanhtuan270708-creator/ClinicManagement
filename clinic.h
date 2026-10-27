@@ -1,3 +1,4 @@
+#include <stdio.h>
 #ifndef CLINIC_H
 #define CLINIC_H
 
@@ -88,5 +89,7 @@ void printPatientList (const Patient list [], int n);
 void inputQueueList (Patient * patient);
 void sortQueue (Patient list [], int patientCount);
 void printSortQueue(Patient list [], int patientCount);
-
+static inline void xoaBoDem() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);}
 #endif
