@@ -1,19 +1,7 @@
 #include "clinic.h"
 #include <stdio.h>
 #include <string.h>
-
-
-//Delete '\n'
-void deleteFgets (char *buffer, int max_len) {
-    fgets(buffer, max_len,stdin); 
-    size_t len = strlen(buffer);
-    if(len > 0 && buffer[len - 1] == '\n') {
-        buffer[len - 1] = '\0';
-    }else {
-        int discardedChar;
-        while ((discardedChar = getchar()) != '\n' && discardedChar != EOF) { }   // bo phan thua
-    }
-}
+#include <stdlib.h>
 
 //define stdin 1 patient
 void inputPatient (Patient * p) {
@@ -64,7 +52,7 @@ void printPatientList (const Patient list [], int n) {
 }
 
 //Doi tu gio sang phut de sap xep thu tu kham
-int convertHoursToMinutes(const char * timetext) {
+static int convertHoursToMinutes(const char * timetext) {
     int hours = (timetext[0] - '0') * 10 + (timetext [1] - '0');
     int minutes = (timetext [3] - '0')* 10 + (timetext [4] - '0');
     return hours * 60 + minutes;
