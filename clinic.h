@@ -3,7 +3,7 @@
 #ifndef CLINIC_H
 #define CLINIC_H
 
-#define MAX_PATIENTS 100 // kich thuoc co dinh cua mang tinh
+#define MAX_DAILY_PATIENTS 500  // kich thuoc co dinh cua mang tinh
 
 #define MAX_ID 20
 #define MAX_PHONE 15
@@ -25,6 +25,10 @@
 #define STT_CHO_KHAM 3
 #define STT_TRE_HEN 4
 
+#define TAI_KHAM 1
+#define BENH_LY_MOI 2
+
+#define MAX_VISITS 500
 
 typedef struct {
     char patientId [MAX_ID];
@@ -89,4 +93,11 @@ void printPatientList (const Patient list [], int n);
 void inputQueueList (Patient * patient);
 void sortQueue (Patient list [], int patientCount);
 void printSortQueue(Patient list [], int patientCount);
+
+int clinicFull (int visitCount, int maxVisits);
+int inputSingleVisit (Visit *visit, const Visit visits [], int visitCount, int *nextCaseNumber);
+void inputVisitList (Visit visits [], int * visitCount, int * nextCaseNumber);
+void printVisitList (const Visit visits [], int visitCount);
+
+void deleteFgets (char * buffer, int max_len);
 #endif
