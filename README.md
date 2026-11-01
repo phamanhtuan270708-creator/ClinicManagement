@@ -77,7 +77,7 @@ Hướng dẫn chi tiết cách thiết lập môi trường, biên dịch mã n
 
 ```g++ main.c patientAndQueue.c prescription.c records.c -o ClinicManagement.exe```
 
-> Lưu ý: Không biên dịch riêng lẻ từng file .cpp (ví dụ: g++ main.cpp)
+> Lưu ý: Không biên dịch riêng lẻ từng file .c (ví dụ: g++ main.c)
 
 ## ***4. Hướng dẫn chạy chương trình***
 
