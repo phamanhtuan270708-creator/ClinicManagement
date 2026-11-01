@@ -29,12 +29,6 @@ void hienThiPrescription(Prescription *p);
 void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p);
 void hienThiDanhSachThanhToan(Payment payments[], int payCount);
 
-// Ham xoa bo nho dem
-void clearBufferMain() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
 // Menu benh nhan va hang cho
 void menuPatientAndQueue() {
     int choice;
@@ -100,7 +94,7 @@ void menuMedicalRecords() {
         printf("Nhap lua chon: ");
         
         if (scanf("%d", &choice) != 1) {
-            clearBufferMain();
+            
             continue;
         }
         clearBufferMain();
@@ -137,10 +131,8 @@ void menuPrescriptionAndPayment() {
         printf("Nhap lua chon: ");
         
         if (scanf("%d", &choice) != 1) {
-            clearBufferMain();
             continue;
         }
-        clearBufferMain();
 
         switch (choice) {
             case 1:
@@ -183,10 +175,8 @@ int main() {
         printf("Nhap lua chon cua ban: ");
 
         if (scanf("%d", &mainChoice) != 1) {
-            clearBufferMain();
             continue;
         }
-        clearBufferMain();
 
         switch (mainChoice) {
             case 1:
