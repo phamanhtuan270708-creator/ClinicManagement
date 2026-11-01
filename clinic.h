@@ -3,10 +3,11 @@
 #ifndef CLINIC_H
 #define CLINIC_H
 
-#define MAX_DAILY_PATIENTS 500  // kich thuoc co dinh cua mang tinh
+#define MAX_DAILY_PATIENTS 500 
+#define MAX_DAILY_APPOINTMENT 500
 
-#define MAX_ID 20
-#define MAX_PHONE 15
+#define MAX_ID 30
+#define MAX_PHONE 12
 #define MAX_NAME 100
 #define MAX_DATE 13
 
@@ -29,6 +30,12 @@
 #define BENH_LY_MOI 2
 
 #define MAX_VISITS 500
+#define MAX_DAILY_APPOINTMENT 500
+#define CLINIC_OPEN_TIME "7:00"
+#define CLINIC_CLOSE_TIME "23:00"
+
+#define APP_DANG_CHO 1
+#define APP_THANH_CONG 2
 
 typedef struct {
     char patientId [MAX_ID];
@@ -100,4 +107,13 @@ void inputVisitList (Visit visits [], int * visitCount, int * nextCaseNumber);
 void printVisitList (const Visit visits [], int visitCount);
 
 void deleteFgets (char * buffer, int max_len);
+int readInteger (int * value);
+
+int inputAppointment (const Patient patients [],const Appointment list[], Appointment *appointment, int patientCount, int appointmentCount);
+void printAppointmentList (const Appointment list [], int appointmentCount);
+
+void themMedicalRecord();
+void hienThiMedicalRecords();
+void timKiemMedicalRecord();
+
 #endif
