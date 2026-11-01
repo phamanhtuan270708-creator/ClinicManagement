@@ -34,7 +34,6 @@ void themMedicalRecord() {
 
     printf("Nhap luot kham: ");
     scanf("%s", temp.visitId);
-    xoaBoDem();
 
     if (findRecord(temp.visitId) != -1) {
         printf("Loi: Luot kham da co ho so!\n");
@@ -43,19 +42,15 @@ void themMedicalRecord() {
 
     printf("Nhap trieu chung: ");
     scanf("%s", temp.symptoms);
-    xoaBoDem();
 
     printf("Nhap chieu cao (cm): ");
     scanf("%f", &temp.height);
-    xoaBoDem();
 
     printf("Nhap can nang (kg): ");
     scanf("%f", &temp.weight);
-    xoaBoDem();
 
     printf("Nhap chan doan: ");
     scanf("%s", temp.diagnosis);
-    xoaBoDem();
 
     records[recordCount] = temp;
     recordCount++;
@@ -82,7 +77,6 @@ void timKiemMedicalRecord() {
     char searchId[20];
     printf("Nhap luot kham can tim: ");
     scanf("%s", searchId);
-    xoaBoDem();
 
     int index = findRecord(searchId);
 
