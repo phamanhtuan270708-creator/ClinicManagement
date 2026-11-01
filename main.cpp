@@ -165,7 +165,7 @@ void menuPrescriptionAndPayment() {
 
 // menu chinh
 int main() {
-    // Khởi tạo đơn thuốc mẫu
+    // Khoi tao don thuoc
     currentPrescription.itemCount = 0;
     strcpy(currentPrescription.prescriptionId, "DT001");
     strcpy(currentPrescription.visitId, "LK001");
