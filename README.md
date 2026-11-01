@@ -65,7 +65,7 @@ Hướng dẫn chi tiết cách thiết lập môi trường, biên dịch mã n
 
 * main.cpp: File chính chứa luồng điều hướng Menu (int main()).
 
-* patientAndQueue.cpp: Module quản lý danh sách bệnh nhân và hàng chờ.
+* patientandqueue.cpp: Module quản lý danh sách bệnh nhân và hàng chờ.
 
 * records.cpp: Module quản lý hồ sơ khám bệnh.
 
@@ -75,7 +75,7 @@ Hướng dẫn chi tiết cách thiết lập môi trường, biên dịch mã n
 
 ##### Mở Terminal tại thư mục gốc của dự án và chạy lệnh:
 
-```g++ main.c patientAndQueue.c prescription.c records.c -o ClinicManagement.exe```
+```g++ main.c patientandqueue.c prescription.c records.c -o ClinicManagement.exe```
 
 > Lưu ý: Không biên dịch riêng lẻ từng file .c (ví dụ: g++ main.c)
 
