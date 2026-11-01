@@ -1,4 +1,4 @@
-#include <stdio.h>
+
 #ifndef CLINIC_H
 #define CLINIC_H
 
@@ -69,7 +69,5 @@ typedef struct {
     double totalAmount;
     char paymentMethods [MAX_METHOD_NAME];
 } Payment;
-static inline void xoaBoDem() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);}
+
 #endif
