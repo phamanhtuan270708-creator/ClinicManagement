@@ -15,19 +15,19 @@ void themPrescriptionItem(Prescription *p) {
     
     printf("Nhap ma thuoc: ");
     scanf("%s", it->medicineId);
-    xoaBoDem();
+    
     
     printf("Nhap so luong: ");
     scanf("%d", &it->quantity);
-    xoaBoDem();
+    
     
     printf("Nhap don gia: ");
     scanf("%lf", &it->unitPrice);
-    xoaBoDem();
+    
     
     printf("Nhap huong dan su dung: ");
     scanf("%s", it->usage);
-    xoaBoDem();
+    
     
     p->itemCount++;
     printf("=> Them muc thuoc thanh cong!\n");
@@ -63,21 +63,18 @@ void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
     Payment pay;
     printf("Nhap ma thanh toan: ");
     scanf("%s", pay.paymentId);
-    xoaBoDem();
 
     printf("Nhap ma luot kham: ");
     scanf("%s", pay.visitId);
-    xoaBoDem();
 
     int laLichOnline, daDenKham;
     printf("Hinh thuc (1. Online, 0. Offline): ");
     scanf("%d", &laLichOnline);
-    xoaBoDem();
-
+    
     if (laLichOnline == 1) {
         printf("Benh nhan da den kham chua? (1. Da den, 0. Chua den): ");
         scanf("%d", &daDenKham);
-        xoaBoDem();
+        
         if (daDenKham == 0) {
             printf("=> LOI: Lich hen online chua den kham, khong duoc tinh thanh toan!\n");
             return;
@@ -103,14 +100,12 @@ void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
     double phiDichVu;
     printf("Nhap phi dich vu: ");
     scanf("%lf", &phiDichVu);
-    xoaBoDem();
 
     pay.totalAmount = tienThuoc + phiDichVu;
 
     printf("Nhap phuong thuc thanh toan: ");
     scanf("%s", pay.paymentMethods);
-    xoaBoDem();
-
+    
     payments[*payCount] = pay;
     (*payCount)++;
     printf("=> Thanh toan thanh cong! Tong tien: %.2lf\n", pay.totalAmount);
