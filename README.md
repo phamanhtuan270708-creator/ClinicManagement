@@ -75,7 +75,7 @@ Hướng dẫn chi tiết cách thiết lập môi trường, biên dịch mã n
 
 ##### Mở Terminal tại thư mục gốc của dự án và chạy lệnh:
 
-```g++ main.cpp patientAndQueue.cpp prescription.cpp records.cpp -o ClinicManagement.exe```
+```g++ main.c patientAndQueue.c prescription.c records.c -o ClinicManagement.exe```
 
 > Lưu ý: Không biên dịch riêng lẻ từng file .cpp (ví dụ: g++ main.cpp)
 
