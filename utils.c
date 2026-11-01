@@ -13,3 +13,19 @@ void deleteFgets (char *buffer, int max_len) {
         while ((discardedChar = getchar()) != '\n' && discardedChar != EOF) { }
     }
 }
+int readInteger(int *value) {
+    char inputText[INPUT_BUFFER_SIZE];
+    char extra;
+
+    deleteFgets(inputText, INPUT_BUFFER_SIZE);
+
+    if (inputText[0] == '\0') {
+        return feof(stdin) ? -1 : 0;
+    }
+
+    if (sscanf(inputText, " %d %c", value, &extra) != 1) {
+        return 0;
+    }
+
+    return 1;
+}
