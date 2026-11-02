@@ -17,10 +17,6 @@ Prescription currentPrescription;
 Payment paymentList[MAX_DAILY_PATIENTS];
 int paymentCount = 0;
 
-// // Khai bao ham medicalRecords
-// void themMedicalRecord();
-// void hienThiMedicalRecords();
-// void timKiemMedicalRecord();
 
 // Khai bao ham Prescription
 void themPrescriptionItem(Prescription *p);
@@ -213,33 +209,6 @@ void menuPatientAndQueue() {
     } while (choice != 0);
 }
 
-// // Menu ho so kham benh
-// void menuMedicalRecords() {
-//     int choice = -1;
-//     do {
-//         printf("\n================ QUAN LY HO SO KHAM BENH ================\n");
-//         printf("1. Them ho so kham benh moi\n");
-//         printf("2. Xem danh sach ho so kham benh\n");
-//         printf("3. Tim kiem ho so theo Ma luot kham\n");
-//         printf("0. Quay lai Menu chinh\n");
-//         printf("==========================================================\n");
-//         printf("Nhap lua chon: ");
-
-//         int readResult = readMenuChoice(&choice);
-//         if (readResult == -1) { return; }
-//         if (readResult == 0) { choice = -1; continue; }
-
-//         switch (choice) {
-//             case 1: themMedicalRecord(); break;
-//             case 2: hienThiMedicalRecords(); break;
-//             case 3: timKiemMedicalRecord(); break;
-//             case 0: break;
-//             default: printf("Lua chon khong hop le!\n");
-//         }
-//     } while (choice != 0);
-// }
-
-
 void menuPrescriptionAndPayment() {
     int choice = -1;
     do {
@@ -269,11 +238,7 @@ void menuPrescriptionAndPayment() {
 
 
 int main() {
-    
     currentPrescription.itemCount = 0;
-    strcpy(currentPrescription.prescriptionId, "DT001");
-    strcpy(currentPrescription.visitId, "LK001");
-
     int mainChoice = -1;
     do {
         printf("\n==================================================\n");
@@ -282,7 +247,6 @@ int main() {
         printf("1. Quan ly Benh nhan & Hang cho kham\n");
         printf("2. Quan ly Lich hen\n");
         printf("3. Quan ly Luot kham\n");
-        // printf("4. Quan ly Ho so kham benh\n");
         printf("4. Quan ly Don thuoc & Thanh toan\n");
         printf("0. Thoat\n");
         printf("==================================================\n");
@@ -296,7 +260,6 @@ int main() {
             case 1: menuPatientAndQueue(); break;
             case 2: menuAppointment(); break;
             case 3: menuVisit(); break;
-            // case 4: menuMedicalRecords(); break;
             case 4: menuPrescriptionAndPayment(); break;
             case 0:
                 printf("\nDa thoat chuong trinh. Chuc ban mot ngay tot lanh!\n");
