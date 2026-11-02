@@ -1,23 +1,7 @@
-#ifndef PATIENT_QUEUE
-#define PATIENT_QUEUE
-
 #include "clinic.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-
-//Delete '\n'
-void deleteFgets (char *buffer, int max_len) {
-    fgets(buffer, max_len,stdin); 
-    size_t len = strlen(buffer);
-    if(len > 0 && buffer[len - 1] == '\n') {
-        buffer[len - 1] = '\0';
-    }else {
-        int discardedChar;
-        while ((discardedChar = getchar()) != '\n' && discardedChar != EOF) { }   // bo phan thua
-    }
-}
 
 //define stdin 1 patient
 void inputPatient (Patient * p) {
@@ -42,14 +26,14 @@ void printPatient (const Patient * p) {
 
 //define tĩnh
 void inputPatientList (Patient list[], int * n) {
-    printf("Nhap So Luong Benh Nhan Hien Tai (Toi da %d): ", MAX_PATIENTS);
+    printf("Nhap So Luong Benh Nhan Hien Tai (Toi da %d): ", MAX_DAILY_PATIENTS);
     scanf("%d",  n);
     getchar();
 
     //neu gia tri cua bien ma con tro n tro toi>max
-    if (*n > MAX_PATIENTS) {
-        printf("Vuot qua kich thuoc mang! Tu dong dat lai thanh %d\n",MAX_PATIENTS);
-        *n = MAX_PATIENTS;
+    if (*n > MAX_DAILY_PATIENTS) {
+        printf("Vuot qua kich thuoc mang! Tu dong dat lai thanh %d\n",MAX_DAILY_PATIENTS);
+        *n = MAX_DAILY_PATIENTS;
     }
     for(int i = 0; i < *n; i++) {
         printf("\n=== Nhap Thong Tin Benh Nhan Thu %d ===\n", i+1);
@@ -66,8 +50,9 @@ void printPatientList (const Patient list [], int n) {
         printPatient(&list[i]);
     }
 }
+
 //Doi tu gio sang phut de sap xep thu tu kham
-int convertHoursToMinutes(const char * timetext) {
+static int convertHoursToMinutes(const char * timetext) {
     int hours = (timetext[0] - '0') * 10 + (timetext [1] - '0');
     int minutes = (timetext [3] - '0')* 10 + (timetext [4] - '0');
     return hours * 60 + minutes;
@@ -75,9 +60,11 @@ int convertHoursToMinutes(const char * timetext) {
 //Le tan len lich hen va thoi gian khach den 
 void inputQueueList (Patient * patient) {
     char inputText[INPUT_BUFFER_SIZE];
+    
     printf("\nChon loai khach hang cho [%s] (1: ONLINE, 2: OFFLINE)", patient -> fullName);
-    deleteFgets(inputText,INPUT_BUFFER_SIZE);
+    deleteFgets(inputText, INPUT_BUFFER_SIZE);
     patient->type = atoi(inputText); 
+
 
     if(patient-> type == TYPE_ONLINE) {
         printf("Nhap gio hen (HH:MM):");
@@ -131,7 +118,7 @@ void sortQueue (Patient list [], int patientCount) {
     }
 }
 
-// in bang va updata trang thai
+// in bang va update trang thai
 void printSortQueue(Patient list [], int patientCount) {
     printf("\n===== Bang Dieu Phoi Phong Kham ======\n");
     printf("| %-25s | %-12s | %-21s |\n", "Ho va Ten","Gio kham","Trang thai");
@@ -150,5 +137,5 @@ void printSortQueue(Patient list [], int patientCount) {
         printf("| %-25s | %-12s | %-21s |\n", list[index].fullName, list[index].displayTime, statusIndex );
        
     }
+
 }
-#endif
