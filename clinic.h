@@ -113,8 +113,9 @@ int readInteger (int * value);
 int inputAppointment (const Patient patients [],const Appointment list[], Appointment *appointment, int patientCount, int appointmentCount);
 void printAppointmentList (const Appointment list [], int appointmentCount);
 
-void themMedicalRecord();
-void hienThiMedicalRecords();
-void timKiemMedicalRecord();
+void themPrescriptionItem(Prescription *p);
+void hienThiPrescription(Prescription *p);
+void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p);
+void hienThiDanhSachThanhToan(Payment payments[], int payCount);
 
 #endif
