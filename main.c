@@ -17,13 +17,6 @@ Prescription currentPrescription;
 Payment paymentList[MAX_DAILY_PATIENTS];
 int paymentCount = 0;
 
-
-// Khai bao ham Prescription
-void themPrescriptionItem(Prescription *p);
-void hienThiPrescription(Prescription *p);
-void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p);
-void hienThiDanhSachThanhToan(Payment payments[], int payCount);
-
 // Doc lua chon menu
 static int readMenuChoice(int *choice) {
     return readInteger(choice);
