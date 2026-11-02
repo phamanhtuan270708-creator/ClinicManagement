@@ -27,7 +27,8 @@ void themPrescriptionItem(Prescription *p) {
     
     printf("Nhap huong dan su dung: ");
     scanf("%s", it->usage);
-    
+    char buffer[INPUT_BUFFER_SIZE];
+    deleteFgets(buffer, INPUT_BUFFER_SIZE);
     
     p->itemCount++;
     printf("=> Them muc thuoc thanh cong!\n");
@@ -105,6 +106,8 @@ void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
 
     printf("Nhap phuong thuc thanh toan: ");
     scanf("%s", pay.paymentMethods);
+    char buffer[INPUT_BUFFER_SIZE];
+    deleteFgets(buffer, INPUT_BUFFER_SIZE);
     
     payments[*payCount] = pay;
     (*payCount)++;
