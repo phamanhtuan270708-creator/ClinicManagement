@@ -17,11 +17,6 @@ Prescription currentPrescription;
 Payment paymentList[MAX_DAILY_PATIENTS];
 int paymentCount = 0;
 
-// // Khai bao ham medicalRecords
-// void themMedicalRecord();
-// void hienThiMedicalRecords();
-// void timKiemMedicalRecord();
-
 // Khai bao ham Prescription
 void themPrescriptionItem(Prescription *p);
 void hienThiPrescription(Prescription *p);
@@ -212,33 +207,6 @@ void menuPatientAndQueue() {
         }
     } while (choice != 0);
 }
-
-// // Menu ho so kham benh
-// void menuMedicalRecords() {
-//     int choice = -1;
-//     do {
-//         printf("\n================ QUAN LY HO SO KHAM BENH ================\n");
-//         printf("1. Them ho so kham benh moi\n");
-//         printf("2. Xem danh sach ho so kham benh\n");
-//         printf("3. Tim kiem ho so theo Ma luot kham\n");
-//         printf("0. Quay lai Menu chinh\n");
-//         printf("==========================================================\n");
-//         printf("Nhap lua chon: ");
-
-//         int readResult = readMenuChoice(&choice);
-//         if (readResult == -1) { return; }
-//         if (readResult == 0) { choice = -1; continue; }
-
-//         switch (choice) {
-//             case 1: themMedicalRecord(); break;
-//             case 2: hienThiMedicalRecords(); break;
-//             case 3: timKiemMedicalRecord(); break;
-//             case 0: break;
-//             default: printf("Lua chon khong hop le!\n");
-//         }
-//     } while (choice != 0);
-// }
-
 
 void menuPrescriptionAndPayment() {
     int choice = -1;
