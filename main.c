@@ -28,7 +28,6 @@ static int readMenuChoice(int *choice) {
     return readInteger(choice);
 }
 
-
 static void bookNewAppointment() {
     if (patientCount == 0) {
         printf("Chua co benh nhan nao! Vui long nhap danh sach benh nhan truoc.\n");
@@ -46,6 +45,7 @@ static void bookNewAppointment() {
         printf("Dat lich chua thanh cong. Vui long thu lai.\n");
         return;
     }
+
     newAppointment->status = APP_DANG_CHO;
     appointmentCount++;
     printAppointmentList(newAppointment, 1);
@@ -62,7 +62,6 @@ static void bookNewAppointment() {
     }
 }
 
-// Xac nhan lich hen da de sau
 static void confirmPendingAppointment() {
     int pendingCount = 0;
     for (int index = 0; index < appointmentCount; index++) {
@@ -71,6 +70,7 @@ static void confirmPendingAppointment() {
             pendingCount++;
         }
     }
+
     if (pendingCount == 0) {
         printf("Khong co lich hen nao dang cho xac nhan.\n");
         return;
@@ -91,9 +91,9 @@ static void confirmPendingAppointment() {
             return;
         }
     }
+
     printf("Khong tim thay Ma Lich Hen [%s].\n", appointmentIdText);
 }
-
 
 void menuAppointment() {
     int choice = -1;
@@ -108,7 +108,11 @@ void menuAppointment() {
 
         int readResult = readMenuChoice(&choice);
         if (readResult == -1) { return; }
-        if (readResult == 0) { choice = -1; continue; }
+        if (readResult == 0) {
+            printf("Lua chon khong hop le!\n");
+            choice = -1;
+            continue;
+        }
 
         switch (choice) {
             case 1: bookNewAppointment(); break;
@@ -119,7 +123,6 @@ void menuAppointment() {
         }
     } while (choice != 0);
 }
-
 
 void menuVisit() {
     int choice = -1;
@@ -133,14 +136,18 @@ void menuVisit() {
 
         int readResult = readMenuChoice(&choice);
         if (readResult == -1) { return; }
-        if (readResult == 0) { choice = -1; continue; }
+        if (readResult == 0) {
+            printf("Lua chon khong hop le!\n");
+            choice = -1;
+            continue;
+        }
 
         switch (choice) {
             case 1:
                 if (patientCount == 0) {
                     printf("Chua co benh nhan nao! Vui long nhap danh sach benh nhan truoc.\n");
                 } else if (visitCount >= MAX_VISITS) {
-                    printf("Da day so luot kham toi da (%d).\n", MAX_VISITS);
+                    printf("Da day so luot kham toi da (%d).\\n", MAX_VISITS);
                 } else {
                     inputVisitList(visitList, &visitCount, &nextCaseNumber);
                 }
@@ -154,7 +161,6 @@ void menuVisit() {
     } while (choice != 0);
 }
 
-
 void menuPatientAndQueue() {
     int choice = -1;
     do {
@@ -167,15 +173,13 @@ void menuPatientAndQueue() {
         printf("===============================================================\n");
         printf("Nhap lua chon: ");
 
-       int readResult = readMenuChoice(&choice);
-
-       if (readResult == -1) {
-          return;
-      }
-       if (readResult == 0) {
-          choice = -1;
+        int readResult = readMenuChoice(&choice);
+        if (readResult == -1) { return; }
+        if (readResult == 0) {
+            printf("Lua chon khong hop le!\n");
+            choice = -1;
             continue;
-       }
+        }
 
         switch (choice) {
             case 1:
@@ -222,7 +226,11 @@ void menuPrescriptionAndPayment() {
 
         int readResult = readMenuChoice(&choice);
         if (readResult == -1) { return; }
-        if (readResult == 0) { choice = -1; continue; }
+        if (readResult == 0) {
+            printf("Lua chon khong hop le!\n");
+            choice = -1;
+            continue;
+        }
 
         switch (choice) {
             case 1: themPrescriptionItem(&currentPrescription); break;
@@ -235,10 +243,10 @@ void menuPrescriptionAndPayment() {
     } while (choice != 0);
 }
 
-
 int main() {
-    
     currentPrescription.itemCount = 0;
+    strcpy(currentPrescription.prescriptionId, "DT001");
+    strcpy(currentPrescription.visitId, "LK001");
 
     int mainChoice = -1;
     do {
@@ -248,7 +256,6 @@ int main() {
         printf("1. Quan ly Benh nhan & Hang cho kham\n");
         printf("2. Quan ly Lich hen\n");
         printf("3. Quan ly Luot kham\n");
-        // printf("4. Quan ly Ho so kham benh\n");
         printf("4. Quan ly Don thuoc & Thanh toan\n");
         printf("0. Thoat\n");
         printf("==================================================\n");
@@ -256,13 +263,16 @@ int main() {
 
         int readResult = readMenuChoice(&mainChoice);
         if (readResult == -1) { break; }
-        if (readResult == 0) { mainChoice = -1; continue; }
+        if (readResult == 0) {
+            printf("Lua chon khong hop le!\n");
+            mainChoice = -1;
+            continue;
+        }
 
         switch (mainChoice) {
             case 1: menuPatientAndQueue(); break;
             case 2: menuAppointment(); break;
             case 3: menuVisit(); break;
-            // case 4: menuMedicalRecords(); break;
             case 4: menuPrescriptionAndPayment(); break;
             case 0:
                 printf("\nDa thoat chuong trinh. Chuc ban mot ngay tot lanh!\n");
