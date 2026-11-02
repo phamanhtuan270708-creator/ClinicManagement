@@ -11,21 +11,21 @@ void themPrescriptionItem(Prescription *p) {
         printf("Don thuoc da dat gioi han toi da!\n");
         return;
     }
-    
+
     PrescriptionItem *it = &p->items[p->itemCount];
-    
+
     printf("Nhap ma thuoc: ");
     scanf("%s", it->medicineId);
-    
+
     printf("Nhap so luong: ");
     scanf("%d", &it->quantity);
-    
+
     printf("Nhap don gia: ");
     scanf("%lf", &it->unitPrice);
-    
+
     printf("Nhap huong dan su dung: ");
     scanf("%s", it->usage);
-    
+
     p->itemCount++;
     printf("=> Them muc thuoc thanh cong!\n");
 }
@@ -36,16 +36,17 @@ void hienThiPrescription(Prescription *p) {
         printf("Don thuoc dang trong!\n");
         return;
     }
-    
+
     double tongTienThuoc = 0;
     printf("\n--- CHI TIET DON THUOC ---\n");
-    
+
     for (int i = 0; i < p->itemCount; i++) {
         double thanhTien = p->items[i].quantity * p->items[i].unitPrice;
         tongTienThuoc += thanhTien;
         printf("%d. Ma thuoc: %s | SL: %d | Gia: %.3lf | Thanh tien: %.3lf\n",
             i + 1, p->items[i].medicineId, p->items[i].quantity, p->items[i].unitPrice, thanhTien);
     }
+
     printf("=> Tong tien thuoc: %.3lf VND\n", tongTienThuoc);
 }
 
@@ -101,10 +102,11 @@ void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
 
     printf("Nhap phuong thuc thanh toan: ");
     scanf("%s", pay.paymentMethods);
-    
+
     payments[*payCount] = pay;
     (*payCount)++;
     p->itemCount = 0;
+
     printf("=> Thanh toan thanh cong! Tong tien: %.3lf VND\n", pay.totalAmount);
 }
 
@@ -125,4 +127,5 @@ void hienThiDanhSachThanhToan(Payment payments[], int payCount) {
         );
     }
 }
+
 #endif
