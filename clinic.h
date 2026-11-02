@@ -3,8 +3,7 @@
 #ifndef CLINIC_H
 #define CLINIC_H
 
-#define MAX_DAILY_PATIENTS 500
-#define MAX_DAILY_APPOINTMENT 500
+#define MAX_DAILY_PATIENTS 500 
 
 #define MAX_ID 30
 #define MAX_PHONE 12
@@ -30,7 +29,6 @@
 #define BENH_LY_MOI 2
 
 #define MAX_VISITS 500
-
 #define MAX_DAILY_APPOINTMENT 500
 #define CLINIC_OPEN_TIME "7:00"
 #define CLINIC_CLOSE_TIME "23:00"
@@ -118,4 +116,5 @@ void themPrescriptionItem(Prescription *p);
 void hienThiPrescription(Prescription *p);
 void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p);
 void hienThiDanhSachThanhToan(Payment payments[], int payCount);
+
 #endif

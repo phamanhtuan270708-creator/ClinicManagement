@@ -17,19 +17,12 @@ Prescription currentPrescription;
 Payment paymentList[MAX_DAILY_PATIENTS];
 int paymentCount = 0;
 
-
-// Khai bao ham Prescription
-void themPrescriptionItem(Prescription *p);
-void hienThiPrescription(Prescription *p);
-void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p);
-void hienThiDanhSachThanhToan(Payment payments[], int payCount);
-
-// Doc lua chon menu. Tra ve 1 neu doc duoc so, 0 neu nhap sai, -1 neu het du lieu (EOF)
+// Doc lua chon menu
 static int readMenuChoice(int *choice) {
     return readInteger(choice);
 }
 
-// Dat lich hen moi + le tan xac nhan
+
 static void bookNewAppointment() {
     if (patientCount == 0) {
         printf("Chua co benh nhan nao! Vui long nhap danh sach benh nhan truoc.\n");
@@ -95,7 +88,7 @@ static void confirmPendingAppointment() {
     printf("Khong tim thay Ma Lich Hen [%s].\n", appointmentIdText);
 }
 
-// Menu lich hen
+
 void menuAppointment() {
     int choice = -1;
     do {
@@ -121,7 +114,7 @@ void menuAppointment() {
     } while (choice != 0);
 }
 
-// Menu luot kham
+
 void menuVisit() {
     int choice = -1;
     do {
@@ -155,7 +148,7 @@ void menuVisit() {
     } while (choice != 0);
 }
 
-// Menu benh nhan va hang cho
+
 void menuPatientAndQueue() {
     int choice = -1;
     do {
@@ -209,8 +202,6 @@ void menuPatientAndQueue() {
     } while (choice != 0);
 }
 
-
-// Menu thuoc va thanh toan
 void menuPrescriptionAndPayment() {
     int choice = -1;
     do {
@@ -238,11 +229,9 @@ void menuPrescriptionAndPayment() {
     } while (choice != 0);
 }
 
-// menu chinh
-int main() {
-    // Khoi tao don thuoc
-    currentPrescription.itemCount = 0;
 
+int main() {
+    currentPrescription.itemCount = 0;
     int mainChoice = -1;
     do {
         printf("\n==================================================\n");
