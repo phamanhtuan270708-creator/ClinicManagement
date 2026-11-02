@@ -4,7 +4,6 @@
 #define CLINIC_H
 
 #define MAX_DAILY_PATIENTS 500 
-#define MAX_DAILY_APPOINTMENT 500
 
 #define MAX_ID 30
 #define MAX_PHONE 12
