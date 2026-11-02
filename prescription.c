@@ -126,5 +126,4 @@ void hienThiDanhSachThanhToan(Payment payments[], int payCount) {
         );
     }
 }
-
 #endif
