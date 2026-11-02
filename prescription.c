@@ -43,12 +43,10 @@ void hienThiPrescription(Prescription *p) {
     
     double tongTienThuoc = 0;
     printf("\n--- CHI TIET DON THUOC (%s) ---\n", p->prescriptionId);
-    printf("Ma luot kham: %s\n", p->visitId);
-    
     for (int i = 0; i < p->itemCount; i++) {
         double thanhTien = p->items[i].quantity * p->items[i].unitPrice;
         tongTienThuoc += thanhTien;
-        printf("%d. Ma thuoc: %s | SL: %d | Gia: %.2lf | Thanh tien: %.2lf\n",
+        printf("%d. Ma thuoc: %s | SL: %d | Gia: %.3lf | Thanh tien: %.3lf\n",
             i + 1, p->items[i].medicineId, p->items[i].quantity, p->items[i].unitPrice, thanhTien);
     }
     printf("=> Tong tien thuoc: %.2lf\n", tongTienThuoc);
@@ -65,9 +63,6 @@ void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
     printf("Nhap ma thanh toan: ");
     scanf("%s", pay.paymentId);
 
-    printf("Nhap ma luot kham: ");
-    scanf("%s", pay.visitId);
-
     int laLichOnline, daDenKham;
     printf("Hinh thuc (1. Online, 0. Offline): ");
     scanf("%d", &laLichOnline);
@@ -75,6 +70,8 @@ void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
     if (laLichOnline == 1) {
         printf("Benh nhan da den kham chua? (1. Da den, 0. Chua den): ");
         scanf("%d", &daDenKham);
+        char buffer[INPUT_BUFFER_SIZE];
+        deleteFgets(buffer, INPUT_BUFFER_SIZE);
         
         if (daDenKham == 0) {
             printf("=> LOI: Lich hen online chua den kham, khong duoc tinh thanh toan!\n");
@@ -126,7 +123,6 @@ void hienThiDanhSachThanhToan(Payment payments[], int payCount) {
         printf("%d. MaTT: %s | MaVK: %s | Tong Tien: %.2lf | Phuong Thuc: %s\n",
             i + 1,
             payments[i].paymentId,
-            payments[i].visitId,
             payments[i].totalAmount,
             payments[i].paymentMethods
         );
