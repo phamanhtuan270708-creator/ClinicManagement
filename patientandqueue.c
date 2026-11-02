@@ -26,13 +26,13 @@ void printPatient (const Patient * p) {
 
 //define tĩnh
 void inputPatientList (Patient list[], int * n) {
-    printf("Nhap So Luong Benh Nhan Hien Tai (Toi da %d): ", MAX_PATIENTS);
+    printf("Nhap So Luong Benh Nhan Hien Tai (Toi da %d): ", MAX_DAILY_PATIENTS);
     scanf("%d",  n);
     getchar();
 
     //neu gia tri cua bien ma con tro n tro toi>max
     if (*n > MAX_PATIENTS) {
-        printf("Vuot qua kich thuoc mang! Tu dong dat lai thanh %d\n",MAX_PATIENTS);
+        printf("Vuot qua kich thuoc mang! Tu dong dat lai thanh %d\n",MAX_DAILY_PATIENTS);
         *n = MAX_PATIENTS;
     }
     for(int i = 0; i < *n; i++) {
