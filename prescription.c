@@ -120,7 +120,7 @@ void hienThiDanhSachThanhToan(Payment payments[], int payCount) {
 
     printf("\n--- DANH SACH THANH TOAN ---\n");
     for (int i = 0; i < payCount; i++) {
-        printf("%d. MaTT: %s | MaVK: %s | Tong Tien: %.2lf | Phuong Thuc: %s\n",
+        printf("%%d. MaTT: %s | Tong Tien: %.3lf VND | Phuong Thuc: %s\n",
             i + 1,
             payments[i].paymentId,
             payments[i].totalAmount,
