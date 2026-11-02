@@ -53,7 +53,7 @@ typedef struct {
 typedef struct {
     char visitId [MAX_ID];
     char patientId [MAX_ID];
-    char changeId [MAX_ID];
+    char caseId [MAX_ID];
     char visitDate [MAX_DATE];
 } Visit;
 
