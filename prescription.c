@@ -2,6 +2,7 @@
 #define PRESCRIPTION_H
 
 #include <stdio.h>
+#include <string.h>
 #include "clinic.h"
 
 // Them thuoc
@@ -16,18 +17,14 @@ void themPrescriptionItem(Prescription *p) {
     printf("Nhap ma thuoc: ");
     scanf("%s", it->medicineId);
     
-    
     printf("Nhap so luong: ");
     scanf("%d", &it->quantity);
-    
     
     printf("Nhap don gia: ");
     scanf("%lf", &it->unitPrice);
     
-    
     printf("Nhap huong dan su dung: ");
     scanf("%s", it->usage);
-    
     
     p->itemCount++;
     printf("=> Them muc thuoc thanh cong!\n");
@@ -59,6 +56,11 @@ void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
         return;
     }
 
+    if (p == NULL || p->itemCount == 0) {
+        printf("=> LOI: Chua co don thuoc nao de thanh toan!\n");
+        return;
+    }
+
     Payment pay;
     printf("Nhap ma don thuoc: ");
     scanf("%s", pay.paymentId);
@@ -78,20 +80,17 @@ void thucHienThanhToan(Payment payments[], int *payCount, Prescription *p) {
         }
     }
 
-    double tienThuoc = 0;
-    int trungMa = 1;
-    for (int i = 0; i < MAX_ID; i++) {
-        if (pay.visitId[i] != p->visitId[i]) {
-            trungMa = 0;
-            break;
-        }
-        if (pay.visitId[i] == '\0') break;
+    printf("Nhap ma luot kham: ");
+    scanf("%s", pay.visitId);
+
+    if (strcmp(pay.visitId, p->visitId) != 0) {
+        printf("=> LOI: Ma luot kham khong khop voi don thuoc hien tai!\n");
+        return;
     }
 
-    if (trungMa == 1) {
-        for (int i = 0; i < p->itemCount; i++) {
-            tienThuoc += p->items[i].quantity * p->items[i].unitPrice;
-        }
+    double tienThuoc = 0;
+    for (int i = 0; i < p->itemCount; i++) {
+        tienThuoc += p->items[i].quantity * p->items[i].unitPrice;
     }
 
     double phiDichVu;
