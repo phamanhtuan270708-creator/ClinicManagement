@@ -245,9 +245,6 @@ void menuPrescriptionAndPayment() {
 
 int main() {
     currentPrescription.itemCount = 0;
-    strcpy(currentPrescription.prescriptionId, "DT001");
-    strcpy(currentPrescription.visitId, "LK001");
-
     int mainChoice = -1;
     do {
         printf("\n==================================================\n");
